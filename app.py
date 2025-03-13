@@ -20,11 +20,11 @@ def create_app():
         database_url += "?sslmode=require"
 
     #configuration
-    app.config.update(
-        SQLALCHEMY_DATABASE_URI=database_url,
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SECRET_KEY=os.environ.get('SECRET_KEY')  # Change in production!
-    )
+
+    app.config["SQLALCHEMY_DATABASE_URI"]=database_url,
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False,
+    app.config["SECRET_KEY"]=os.environ.get('SECRET_KEY')  # Change in production!
+
 
     # initialize db
     db.init_app(app)
