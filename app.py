@@ -214,4 +214,4 @@ flask_app = create_app()
 if __name__ == '__main__':
     # Never run with debug=True in production!
     flask_app.run(port=int(os.environ.get('PORT', 2300)),
-                debug=os.environ.get('FLASK_DEBUG', 'false').lower() == 'true')
+                debug=os.environ.get('DEBUG_MODE', 'false').lower() == 'true')

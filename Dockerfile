@@ -7,7 +7,7 @@ COPY . /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 
-RUN flask db init && flask db migrate -m "Auto migration" && flask db upgrade
+COPY . .
 
 
-CMD [ "sh", "-c", "gunicorn", "app:flask_app" ]
+CMD [ "sh", "-c", "flask db upgrade && gunicorn", "app:flask_app" ]
