@@ -13,6 +13,9 @@ def create_app():
     # db configuration
     database_url = os.environ.get("DATABASE_URL")
 
+    if not database_url:
+        raise RuntimeError("DATABASE_URL environment variable not set")
+
     if database_url and database_url.startswith("postgres://"):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
 
@@ -21,14 +24,14 @@ def create_app():
 
     #configuration
 
-    app.config["SQLALCHEMY_DATABASE_URI"]=database_url,
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False,
+    app.config["SQLALCHEMY_DATABASE_URI"]=database_url
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
     app.config["SECRET_KEY"]=os.environ.get('SECRET_KEY')  # Change in production!
 
 
     # initialize db
     db.init_app(app)
-    migrate = Migrate(app,db)
+    Migrate(app,db)
 
     # Security headers for production
     if app.config.get('FLASK_ENV') == 'production':
