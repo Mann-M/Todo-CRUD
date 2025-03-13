@@ -1,0 +1,22 @@
+{% extends 'base.html'%} {% block title%}Create Todo{% endblock%} {% block
+content %}
+<div class="create-container">
+  <h1>Create Todo</h1>
+  <form method="POST">
+    <label>Title :</label><br />
+    <input type="text" name="title" required />
+    <label>Description :</label>
+    <textarea name="description"></textarea>
+    <label>Priority</label>
+    <select name="priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+
+    <button type="submit">Create Todo</button>
+  </form>
+  <br />
+  <a href="{{ url_for('index') }}">Back to Todo</a>
+</div>
+{%endblock%}

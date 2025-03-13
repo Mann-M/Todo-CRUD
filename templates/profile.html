@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %} Welcome {{name|title}}! {% endblock
+title %} {% block content %}
+<div class="profile_container">
+  <h1>{{user.name|title}}</h1>
+  <label>User_id</label>
+  <p>{{user.user_id}}</p>
+  <label>Name</label>
+  <p>{{user.name}}</p>
+  <label>Email_id</label>
+  <p>{{user.email_id}}</p>
+  <label>Date of Birth</label>
+  <p>{{user.dob}}</p>
+  <br /><br />
+  <a href="{{ url_for('change_password') }}"> >>>Change password<<<</a>
+</div>
+{% endblock content %}

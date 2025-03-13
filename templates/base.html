@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Base Template{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}"/>
+  </head>
+  <body>
+    <nav class="navigationBar">
+      <ul class="navList">
+        {% if g.is_authenticated %}
+          <li class="profile-btn">
+            <div class="dropdown">
+              <button class="profile-profile">
+                Hi, {{ g.name if g.name else 'Guest' }}
+              </button>
+              <div class="dropdown-content">
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </div>
+            </div>
+          </li>
+
+        {% else %}
+          <li class="profile-btn">
+              <button class="login-btn" onclick="location.href='{{url_for('login') }}'">
+                Login
+              </button>
+          </li>
+        {% endif %}
+        <li>
+          <header class="pageHeader">
+            <a href="{{ url_for('index') }}">To Do App</a>
+          </header>
+        </li>
+        <div class="counter">
+          <li>
+            <div class="incomplete-task">
+            <span>Incomplete</span>
+            <span>
+            {{not_completed_todo}}
+            </span>
+            </div>
+          </li>
+          <li>
+            <div class="complete-task">
+            <span>Completed</span>
+            <span>
+            {{complete_todo}}
+            </span>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages%}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %} {% endblock %}
+
+    <script src="{{url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
