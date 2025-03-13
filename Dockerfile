@@ -6,7 +6,7 @@ COPY . /app/
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-ENV FLASK_APP = app.py
+ENV FLASK_APP = app:flask_app
 
 WORKDIR /app/ToDo
 RUN flask db init && flask db migrate && flask db upgrade
