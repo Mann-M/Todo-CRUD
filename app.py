@@ -22,9 +22,9 @@ def create_app():
 
     #configuration
     app.config.update(
-        SQLALCHEMY_DATABASE_URI=database_url or 'postgresql://postgres:root@localhost/todo',
+        SQLALCHEMY_DATABASE_URI=database_url,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SECRET_KEY=os.environ.get('SECRET_KEY', 'fallback_for_dev')  # Change in production!
+        SECRET_KEY=os.environ.get('SECRET_KEY')  # Change in production!
     )
 
     # initialize db
