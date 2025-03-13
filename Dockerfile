@@ -9,6 +9,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
-ENV FLASK_APP = app:flask_app
+ENV FLASK_APP=app:flask_app
 
 CMD [ "sh", "-c", "flask db migrate && flask db upgrade && gunicorn", "app:flask_app" ]
