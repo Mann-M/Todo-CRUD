@@ -11,7 +11,7 @@ def create_app():
     app = Flask(__name__ , template_folder="templates")
 
     # db configuration
-    database_url = os.environ.get("DATABASE_URL")
+    database_url = os.getenv("DATABASE_URL")
     print("DATABASE_URL:", database_url)  # For debugging in logs
     if not database_url:
         raise RuntimeError("DATABASE_URL environment variable not set")
@@ -26,7 +26,7 @@ def create_app():
 
     app.config["SQLALCHEMY_DATABASE_URI"]=database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
-    app.config["SECRET_KEY"]=os.environ.get('SECRET_KEY')  # Change in production!
+    app.config["SECRET_KEY"]=os.getenv('SECRET_KEY')  # Change in production!
 
 
     # initialize db
