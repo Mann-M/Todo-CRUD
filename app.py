@@ -3,7 +3,6 @@ from flask_migrate import Migrate
 from models import db, Todo , User
 from datetime import datetime, timezone, timedelta
 import os
-from urllib.parse import urlparse
 from dotenv import load_dotenv
 
 load_dotenv()
