@@ -11,20 +11,20 @@ def create_app():
     app = Flask(__name__ , template_folder="templates")
 
     # db configuration
-    # database_url = os.getenv("DATABASE_URL")
-    # print("DATABASE_URL:", database_url)  # For debugging in logs
-    # if not database_url:
-    #     raise RuntimeError("DATABASE_URL environment variable not set")
+    database_url = os.environ.get("DATABASE_URL")
+    print("DATABASE_URL:", database_url)  # For debugging in logs
+    if not database_url:
+        raise RuntimeError("DATABASE_URL environment variable not set")
 
-    # if database_url and database_url.startswith("postgres://"):
-    #     database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    if database_url and database_url.startswith("postgres://"):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
 
-    # if 'localhost' not in database_url and "sslmode" not in database_url:
-    #     database_url += "?sslmode=require"
+    if 'localhost' not in database_url and "sslmode" not in database_url:
+        database_url += "?sslmode=require"
 
     #configuration
 
-    app.config["SQLALCHEMY_DATABASE_URI"]=os.getenv("DATABASE_URL")
+    app.config["SQLALCHEMY_DATABASE_URI"]=database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
     app.config["SECRET_KEY"]=os.getenv('SECRET_KEY')  # Change in production!
 
