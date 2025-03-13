@@ -12,7 +12,7 @@ def create_app():
 
     # db configuration
     database_url = os.environ.get("DATABASE_URL")
-
+    print("DATABASE_URL:", database_url)  # For debugging in logs
     if not database_url:
         raise RuntimeError("DATABASE_URL environment variable not set")
 
